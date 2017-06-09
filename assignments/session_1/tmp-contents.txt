@@ -1,0 +1,2 @@
+total 4
+drwx------ 2 vagrant vagrant 4096 Jun  8 22:48 tmux-1000
