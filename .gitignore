@@ -3,7 +3,8 @@
 *.swp 
 *.swo
 
-
+#log files
+*.log
 
 #vagrant
 .vagrant/
