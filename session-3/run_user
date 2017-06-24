@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+export RUN_USER "ubuntu"
+export RUNUSER_PROG "/sbin/runuser"
+#export COMMAND= "echo USER"
+
+export command = "<<-'HERE1a'
+echo $USER 
+HERE1a 
+sudo ${RUNUSER_PROG} -l ${RUN_USER} -c "${COMMAND}"
+
+
