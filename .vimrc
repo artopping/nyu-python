@@ -2,6 +2,6 @@
 
 set tabstop=4           " number of visual spaced per TAB
 set softtabstop=4       " number of spaces in tab when editing 
-set expandtab=4			" tabs are spaces 
+set expandtab 			" tabs are spaces 
 
 
