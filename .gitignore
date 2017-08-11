@@ -113,3 +113,6 @@ VENV/
 
 # mypy
 .mypy_cache/
+
+#from assignment 4 
+output.*
