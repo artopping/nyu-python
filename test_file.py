@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+
+x = 0
+while x < 10:
+    print(x)
+    x += 1
+print("All done")
+ 
+
+#print "Hello World!"
+
+
