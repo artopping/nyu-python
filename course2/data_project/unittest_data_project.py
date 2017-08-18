@@ -5,9 +5,9 @@ import unittest
 
 from data_project import Teams
 
-class TestTeams(unittest.TestCase):
+class TestTeam(unittest.TestCase):
         def setUp(self):
-            self.a_team= Teams('applications')
+            self.a_team= Team('applications')
         def testWorklogs (self):
-            self.assertNotEqual(self.a_triangle.
+            self.assertNotEqual(self.a_Team.
             
