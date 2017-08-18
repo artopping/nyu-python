@@ -1,1 +1,5 @@
-Aaron,Morton,July,1985,Red,Top Gun
+"---\n- color: Blue\n  dob_month: June\n  dob_year: '1984'\n  first_name: Susan\n\
+  \  last_name: Williams\n  movie: A Few Good Men\n- color: Green\n  dob_month: May\n\
+  \  dob_year: '1985'\n  first_name: Aaron\n  last_name: Jones\n  movie: Top Gun\n\
+  - color: Red\n  dob_month: August\n  dob_year: '1986'\n  first_name: James\n  last_name:\
+  \ Henry\n  movie: Jerry Macguire\n"

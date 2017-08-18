@@ -6,91 +6,91 @@ import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+import datetime
+
+#import team info for team classification
+from team_info import project_teams
+
+pd.options.mode.chained_assignment = None  # default='warn'
 
 df = pd.read_csv('/vagrant/course2/data_project/jira_dataset.csv')
-#print (df)
-#print(df.head())
+df['team']= df.person.apply(project_teams)
 
-#overall charts and trends
-def aggregate():
-    """aggregating data by team and component"""
-    applications= ['jevans', 'jhoule', 'mpuello', 'kyang']
-    development= ['rdw', 'ysaxena', 'scarnes']
-    infrastructure= ['smeltzer', 'tpenn', 'awestfall']
-    df_break= df.loc[(df.component=='break/fix')]
-    #print (df_break.head())
-    df_component= df.groupby(df.component)
-    df_component_time= df_component.aggregate({'time_spent':np.sum})
-    print(df_component_time)
-    
-    df_app= df.loc[df.person.isin(applications)]
-    df_dev= df.loc[df.person.isin(development)]
-    df_inf= df.loc[df.person.isin(infrastructure)]
+class Team:    
+    def __init__(self,team):
+        global df
+        self.df= df
+        self.team=team
+        self.df_team= self.df.loc[(self.df.team==self.team)]
+        self.df_team_component= self.df_team.groupby(self.df_team.component)
 
-    df_app_component=df_app.groupby(df_app.component)
-    df_app_component_time= df_app_component.aggregate({'time_spent':np.sum})
-    print (df_app_component_time)
-    app_time=df_app_component_time.nlargest(10,'time_spent')
-    app_time.plot(kind='barh')
-    plt.show()
-    #plt.bar(df_app_component_time.time_spent, df_app_component_time.component, align='center', alpha=0.5)
-    #df_app_component_time[:10].sort(ascending=0).plot(kind='barh')
+    def team_worklogs (self):
+        worklogs= self.df_team.groupby('team')['worklog_id'].nunique()
+        #print(worklogs.iloc[0])
+        return worklogs.iloc[0]
 
-    df_dev_component= df_dev.groupby(df_dev.component)
-    df_dev_component_time= df_dev_component.aggregate({'time_spent':np.sum})
-    print (df_dev_component_time)
-    
-    df_inf_component=df_inf.groupby(df_inf.component)
-    df_inf_component_time= df_inf_component.aggregate({'time_spent': np.sum})
-    print (df_inf_component_time)
-    
-    return df_app_component_time
-    return df_dev_component_time
-    return df_inf_component_time
-'''    df_project= df.groupby(df.project)
-    #print(df_project)
-    df_project_worklogs= df_project.sum()
-    df_project_time= df_project.aggregate({'time_spent':np.sum})
-    #print(df_project_time)
-    df_project_worklogs= df_project.aggregate({'worklog_id':pd.nunique})
-    #print(df_project_worklogs)
-    df_project_worklogs= df.groupby(['project']).agg({'worklog_id':lambda x:x.count()})
-    #print(df_project_worklogs)
-    df_project_empl= df.groupby(['project']).apply({'person':lambda x:x.nunique()})
-    df_project_empl= df.apply(pd.Series.nunique)
-    #print(df_project_empl)
-   ''' 
-def plots(df_app_component_time):
-    df_time = df.drop(['worklog_id','issue_id', 'project', 'person', 'component', 'component_description', 'time_spent', 'date'], axis=1)
-    exclude_time= ['issue_id', 'project', 'person', 'component', 'component_description', 'time_spent', 'date']
-    #df.ix[:,df.columns.difference(exclude_time)].plot(kind='bar')
-    #print(df_time.head())
-    #time= df (mdates.date2num(df_time))
-    #plt.hist(time.values)
-    #plt.savefig(time.png)
-    #plt.show
-    
-    df_app_component_time[:10].sort(ascending=0).plot(kind='barh')
-     
-    #df['time'].hist(by=df['project'])
-    #print (p)
+    def team_hours (self):
+        self.df_team_hours= self.df_team['time_spent'].aggregate(['sum'])
+        #print(self.df_team_hours.iloc[0])
+        return self.df_team_hours.iloc[0]
 
+    def team_hours_breakfix(self):
+        breakfix=self.df_team.loc[(self.df_team.component=='break/fix')]
+        breakfix_hours= breakfix['time_spent'].aggregate(['sum'])
+        total_hours= self.df_team_hours
+        percent_breakfix= (breakfix_hours/total_hours)*100
+        return percent_breakfix.iloc[0]
 
-#creating a Team class that gives metrics by office/team
-class Team:
-    def __init__(self, team_name):
-        self.team_name=team_name
-        d1=df.query ('project== "team_name"')
-        return team_name
+    def team_component_worklogs(self):
+        df_team_component_worklog= self.df_team_component['worklog_id'].aggregate(['count'])
+        df_team_component_worklog_10=df_team_component_worklog.nlargest(10,'count')
+        df_team_component_worklog_10.plot(kind='barh', legend=False)
+        plt.ylabel('Component')
+        plt.xlabel('Total work logs')
+        plt.show()
+        #fig.savefig('Figure1_.jpg')
 
-    def work(self):
-        d1['worklog_count']= d1.groupby(['project'].transform(lambda x:x[x.str.contains(team_name).count()]))
-        print(d1)
+    def team_component_time (self):
+        df_team_component_time= self.df_team_component.aggregate({'time_spent':np.sum})
+        df_team_component_time_10=df_team_component_time.nlargest(10,'time_spent')
+        df_team_component_time_10.plot(kind='barh', legend=False)
+        plt.ylabel('Component')
+        plt.xlabel('Total hours')
+        plt.show()
+        #plt.savefig('Figure2_.png')
 
-    def time(self):
-        return none
-        
+    def over_time(self):
+        self.df_team['date_format']=pd.to_datetime(self.df_team['date'])
+        df_over_time= self.df_team.groupby('date_format')[ 'worklog_id'].nunique()
+        plt.plot(df_over_time)
+        plt.xlabel('Date')
+        plt.ylabel('Number of worklog IDs')
+        #plt.legend()
+        plt.show()
+        #savefig('Figure3_.jpg')
+        #print(df_time)  
+
 if __name__== "__main__":
-    aggregate()
-    #plots()
+    print("Which team's data would you like to look at? (options: applications, development, infratrucutre)")
+
+    team_input= input()
+    a=Team(team_input)
+
+    print("You have selected " + str(team_input)+". Here is the team breakdown:")
+    b=a.team_worklogs()
+    print("The total number of worklogs logged this year is:")
+    print(str(b))
+    print("See plot for breakdown of worklogs by component")
+    a.team_component_worklogs()
+    #print(b)
+    print("The total number of hours logged this year is:")
+    print(str(a.team_hours()))
+    print("See plot for breakdown of hours by component")
+    a.team_component_time()
+    #print(c)
+    print('The percentage of hours attributed to break/fix components is:')
+    print(str(a.team_hours_breakfix()))
+    print("See plot for worklog over time.") 
+    a.over_time()
+
 

@@ -1,2 +1,1 @@
-{"first_name":“Tom”,"last_name":”Collins”,"dob_month":”August”,"dob_year":1989, “color”:“red”,“movie”:“Jerry Maguire”}
-
+[{"color": "Blue", "first_name": "Susan", "dob_year": "1984", "last_name": "Williams", "dob_month": "June", "movie": "A Few Good Men"}, {"color": "Green", "first_name": "Aaron", "dob_year": "1985", "last_name": "Jones", "dob_month": "May", "movie": "Top Gun"}, {"color": "Red", "first_name": "James", "dob_year": "1986", "last_name": "Henry", "dob_month": "August", "movie": "Jerry Macguire"}]
