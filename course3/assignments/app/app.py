@@ -1,4 +1,4 @@
-# app.py
+# app.py created from http://charlesleifer.com/blog/how-to-make-a-flask-blog-in-one-hour-or-less/
 import datetime
 import functools
 import os
@@ -206,7 +206,7 @@ def clean_querystring(request_args, *keys_to_remove, **new_values):
 
 @app.errorhandler(404)
 def not_found(exc):
-    return Response('<h3>Not found</h3>'), 404
+    return Response('<h3>Still not working!!!</h3>'), 404
 
 def main():
     database.create_tables([Entry, FTSEntry], safe=True)
