@@ -16,6 +16,7 @@ flatpages = FlatPages(app)
 freezer = Freezer(app)
 app.config.from_object(__name__)
 
+
 #log in, log out from https://pythonspot.com/en/login-authentication-with-flask/
 @app.route('/')
 def index():
@@ -37,7 +38,7 @@ def do_admin_login():
 def posts():
 	if session.get('logged_in'):
 		posts = [p for p in flatpages if p.path.startswith(POST_DIR)]
-		posts.sort(key=lambda item:item['date'], reverse=False)
+		posts.sort(key=lambda item:item['date'], reverse=True)
 		return render_template('posts.html', posts=posts)
 	else:
 		return index()
@@ -55,7 +56,7 @@ def profile(username):
 @app.route("/logout")
 def logout():
     session['logged_in'] = False
-    return home()
+    return index()
 
 if __name__=="__main__":
 	app.secret_key = os.urandom(12)
