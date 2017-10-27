@@ -1,6 +1,24 @@
-{% for post in posts %}
-    <a href="{{ url_for('post', name=post.path.replace('posts/', '')) }}">
-        {{ post.title }}
-    </a>
-    <small>{{ post.date }}</small>
-{% endfor %}
+
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+    <style type="text/css">
+      .posts{
+        margin: 20px;
+      }
+      .title{
+		color: #000000;
+      }
+    </style>
+    <div class="posts">
+    	<div class="title">
+			<h1>{{ post.title }}</h1>
+		</div>
+		<body>
+			{{ post.date }}
+			{{ post.html|safe }}
+		</body>
+	</div>
+</html>
+{% endblock %}

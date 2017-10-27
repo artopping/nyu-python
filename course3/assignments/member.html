@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+    <style type="text/css">
+      .posts{
+        margin: 20px;
+      }
+      .title{
+		color: #000000;
+      }
+    </style>
+    <div class="photo">
+        <% photo_folder= '/static/photos'%>
+        <% for photo in photo_folder:%>
+          <img src="" alt= "Profile photo">
+        <% endfor %>
+    </div>
+    <div class="bio">
+        <label class="header">Name:</label>
+    </div>
+		<body>
+			{{ post.html|safe }}
+		</body>
+</html>
+{% endblock %}
