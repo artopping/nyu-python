@@ -25,9 +25,10 @@ print df_2013.groupby('CATEGORY')['PERCENT'].mean()
 	# of declare religious exemption, many of these students have neither
 	# because they were entered into the system in the pre-Jan PBE time 
 mean_2013= df_2013.groupby('CATEGORY')['PERCENT'].mean()
-a= mean_2013.plot.bar()
+mean_2013.plot.bar()
+plt.subplots_adjust(bottom=.55)
 plt.savefig('Figure1_2013')
-
+plt.show()
 
 df_2014 = df[df['SCHOOL YEAR'] == '2014-2015']
 print df_2014.groupby('CATEGORY')['PERCENT'].mean()
@@ -38,7 +39,8 @@ print df_2014.groupby('CATEGORY')['PERCENT'].mean()
 		# 1.5% declared religious exemption 
 		# the rest <0.01% where declared permanent medical exemption
 mean_2014= df_2014.groupby('CATEGORY')['PERCENT'].mean()
-b= mean_2014.plot.bar()
+mean_2014.plot.bar()
+plt.subplots_adjust(bottom=.55)
 plt.savefig('Figure1_2014')
 
 
@@ -48,7 +50,8 @@ print df_2015.groupby('CATEGORY')['PERCENT'].mean()
 	# similar breakdown of religious/health care counseled PBE 
 	# new field for overdue 0.7%
 mean_2015= df_2015.groupby('CATEGORY')['PERCENT'].mean()
-c=mean_2015.plot.bar()
+mean_2015.plot.bar()
+plt.subplots_adjust(bottom=.55)
 plt.savefig('Figure1_2015')
 
 
@@ -59,6 +62,8 @@ df_uptodate = df[df['CATEGORY'] == 'Up-To-Date']
 mean_uptodate= df_uptodate .groupby('SCHOOL YEAR')['PERCENT'].mean()
 d= mean_uptodate.plot.bar()
 d.set_ylim(.9,1)
+
+
 plt.savefig('Figure1_uptodate')
 
 
