@@ -59,7 +59,6 @@ df_uptodate = df[df['CATEGORY'] == 'Up-To-Date']
 mean_uptodate= df_uptodate .groupby('SCHOOL YEAR')['PERCENT'].mean()
 d= mean_uptodate.plot.bar()
 d.set_ylim(.9,1)
-d = plt.figure()
 plt.savefig('Figure1_uptodate')
 
 
