@@ -42,7 +42,7 @@ mean_2014= df_2014.groupby('CATEGORY')['PERCENT'].mean()
 mean_2014.plot.bar()
 plt.subplots_adjust(bottom=.55)
 plt.savefig('Figure1_2014')
-
+plt.show()
 
 df_2015 = df[df['SCHOOL YEAR'] == '2015-2016']
 print df_2015.groupby('CATEGORY')['PERCENT'].mean()
@@ -53,7 +53,7 @@ mean_2015= df_2015.groupby('CATEGORY')['PERCENT'].mean()
 mean_2015.plot.bar()
 plt.subplots_adjust(bottom=.55)
 plt.savefig('Figure1_2015')
-
+plt.show()
 
 
 # looking at it a little differently, up to date by year
