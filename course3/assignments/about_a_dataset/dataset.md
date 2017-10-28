@@ -1,6 +1,7 @@
 # Immunization Rates in California Schools (7th grade)
 
-School Year 2013-2014
+School Year 2013-2014:
+
 ![alt text](https://github.com/artopping/nyu-python/tree/master/course3/assignments/about_a_dataset/static/Figure1_2013.png)
 
 	+ 94% of students were up to date in the 2013-2014 school year 
