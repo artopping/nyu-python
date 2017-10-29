@@ -6,29 +6,31 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 	<link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="{% static 'css/blog.css' %}">
-        <title>Django Girls blog</title>
+        <title>Alice's blog</title>
     </head>
-    <body>
+   <body>
         <div class= "page-header">
-            <h1><a href="/">Django Girls Blog</a></h1>
-        
-            <div class="content container">
-                <div class="row">
-                    <div class="col-md-8">
-                    {% for post in posts %}
-                        <div class="post">
-                            <div class="date">
-                            <p>published: {{ post.published_date }}</p>
-                            </div>
-                            <h1><a href="">{{ post.title }}</a></h1>
-                            <p>{{ post.text|linebreaksbr }}</p>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
+            <h1><a href="/">Alice's Blog Site in Django</a></h1>
+        </div>
+        <div class= "main-body">
+        	<p></p>
+        		<p> Welcome to this blog-in-progress. It's made in Django and ..well it's a little Djanky but I'm working on it! </p>
+        		<p> Check out my Git: <a href="https://github.com/artopping">link</a></p>
+        		<p> Flask blog content here : <a href="https://github.com/artopping/nyu-python/tree/master/course3/assignments/web">link</a></p>
+        						<div>
+				                    {% for post in posts %}
+				                        <div class="post">
+				                            <div class="date">
+				                            <p>published: {{ post.published_date }}</p>
+				                            </div>
+				                            <h1><a href="">{{ post.title }}</a></h1>
+				                            <p>{{ post.text|linebreaksbr }}</p>
+				                        </div>
+				                    {% endfor %}
+				                </div>
         </div>
 
-        </div>
-    </body>
- <footer> created with help from <a href="https://djangogirls.org">link</a></footer>
+     </div>
+	</body>
+ <footer> Created with help from the Django Girls Tutorial <a href="https://djangogirls.org">link</a></footer>
 </html>
